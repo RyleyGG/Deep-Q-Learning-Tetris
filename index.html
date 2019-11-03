@@ -1,0 +1,295 @@
+<html>
+<head>
+    <title> AI Tetris</title>
+
+    <style>
+
+    @font-face 
+    {
+        font-family: 'Tetris Regular';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Tetris Regular'), url('Tetris.woff') format('woff');
+    }
+
+        body
+        {
+            background-color: rgb(0, 0, 0);
+        }
+
+        canvas
+        {
+            position: relative;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            width: 20%;
+        }
+
+        .textBorder
+        {
+            position: absolute;
+            width: 17vw;
+            height: 17vh;
+            top: 2vh;
+            left: 0.2vw;
+            background-color: #000;
+            z-index: -1;
+            border: 2px solid #4e03fc;
+            border-radius: 5px;
+        }
+
+        .botInfoBorder
+        {
+            position: absolute;
+            width: 36vw;
+            height: 38vh;
+            bottom: 2vh;
+            left: 0.2vw;
+            background-color: #000;
+            z-index: -1;
+            border: 2px solid #4e03fc;
+            border-radius: 5px;
+        }
+
+        .nextShapeBorder
+        {
+            position: absolute;
+            width: 17vw;
+            height: 25vh;
+            top: 2vh;
+            right: 0.2vw;
+            background-color: #000;
+            z-index: -1;
+            border: 2px solid #4e03fc;
+            border-radius: 5px;
+        }
+
+        #nextShapeText
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            top: 0px;
+            right: 9vw;
+            font-size: 2.5vw;
+            text-justify: left;
+            color: white;
+        }
+
+        #scoreText
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            top: 0px;
+            left: 0.9vw;
+            font-size: 2.5vw;
+            text-justify: left;
+            color: white;
+        }
+
+        #ageText
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            bottom: 33vh;
+            left: 0.9vw;
+            font-size: 1.2vw;
+            text-justify: left;
+            color: white;
+        }
+
+        #actionText
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            bottom: 22vh;
+            left: 0.9vw;
+            font-size: 1.2vw;
+            text-justify: left;
+            color: white;
+        }
+
+        #totalScoreText
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            bottom: 27.3vh;
+            left: 0.9vw;
+            font-size: 1.2vw;
+            text-justify: left;
+            color: white;
+        }
+
+
+        #totalGamesText
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            bottom: 16.5vh;
+            left: 0.9vw;
+            font-size: 1.2vw;
+            text-justify: left;
+            color: white;
+        }
+
+        #shapeGameText
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            bottom: 5.5vh;
+            left: 0.9vw;
+            font-size: 1.2vw;
+            text-justify: left;
+            color: white;
+        }
+
+        #goodShapeText
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            bottom: 0px;
+            left: 0.9vw;
+            font-size: 1.2vw;
+            text-justify: left;
+            color: white;
+        }
+
+        #rewardText
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            bottom: 11vh;
+            left: 0.9vw;
+            font-size: 1.2vw;
+            text-justify: left;
+            color: white;
+        }
+
+        #levelText
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            top: 59px;
+            left: 0.9vw;
+            font-size: 2.5vw;
+            text-justify: left;
+            color: white;
+        }
+
+        #lostText
+        {
+            position: fixed;
+            font-family: 'Tetris Regular';
+            color: white;
+            display: block;
+            width: 100%;
+            height: 100%;
+            font-size: 3vh;
+            left: -0.1%;
+            top: 20%;
+            text-align: center;
+        }
+
+        #restart
+        {
+            font-family: 'Tetris Regular';
+            position: fixed;
+            display: block;
+            width: 10vw;
+            font-size: 2.3vh;
+            left: 45vw;
+            top: 73vh;
+            text-align: center;
+            z-index: 1;
+        }
+
+        #nextShapeImage
+        {
+            position: fixed;
+            display: block;
+            width: 7vw;
+            right: 3vw;
+            top: 5vh;
+            z-index: 1;
+        }
+
+        #saveProgress
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            bottom: 10vh;
+            right: 0.9vw;
+            font-size: 1.5vw;
+            text-justify: center;
+            color: black;
+        }
+
+        #reloadProgress
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            bottom: 3vh;
+            right: 0.9vw;
+            font-size: 1.5vw;
+            text-justify: center;
+            color: black;
+        }
+        
+        .canvas-container
+        {
+            position: relative;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+    </style>
+
+    <script src = "build/convnet.js"></script>
+    <script src = "build/deepqlearn.js"></script>
+    <script src = "build/util.js"></script>
+    <script src = "build/vis.js"></script>
+    <script src = "build/network-initialization.js"></script>
+    <script src = "build/function-interval-initialization.js"></script>
+    
+    
+</head>
+
+<body onload = 'initNet()'>
+    <!-- All elements that appear on the screen are listed here -->
+
+    <p id = 'scoreText'> Score: 0 </p>
+    <p id = 'levelText'> Level: 0 </p>
+    <p id = 'nextShapeText'> Next:</p>
+    <p id = 'ageText'> Age: 0 minutes</p>
+    <p id = 'actionText'> Total Actions: 0</p>
+    <p id = 'rewardText'> Average Reward: 0 (0 last 15 min.)</p>
+    <p id = 'totalGamesText'> Total Games Played: 0</p>
+    <p id = 'totalScoreText'> Total Score: 0</p>
+    <p id = 'shapeGameText'> Average Shapes Per Game: 0 (0 last 15 min.)</p>
+    <p id = 'goodShapeText'> Average "Good Shapes" Per Game: 0 (0 last 15 min.)</p>
+    <button id = 'saveProgress' onclick = "progressUpdate('save')">Save Progress</button>
+    <button id = 'reloadProgress' onclick = "progressUpdate('reload')">Reload Progress</button>
+
+    <img src = '' alt = 'next shape' id = 'nextShapeImage'>
+
+    <div class="textBorder"></div>
+    <div class="botInfoBorder"></div>
+    <div class="nextShapeBorder"></div>
+
+    <div class = 'canvas-container' id="gameover" style="display: none">
+        <canvas width="600" height="1200" style="border: 5px solid #4e03fc"></canvas>
+        <button id = 'restart' onclick="newGame()">Restart Game</button>
+        <p id = 'lostText'> Game Over<br>Score: 0</p>
+    </div>
+
+    <!-- ------------------------------------------------------------ -->
+
+    <canvas id="tetris" width="600" height="1200" style="border: 5px solid #4e03fc"></canvas>
+    <script src = "build/AITetris.js"></script>
+</body>
+</html>
