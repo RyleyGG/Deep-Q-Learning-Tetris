@@ -1,4 +1,4 @@
-# Deep-Q-Learning-Tetris
+# Deep Q-Learning Tetris
 A ground-up recreation of the classic game of 'Tetris', with the added layer of an AI learning the game via Deep Q-Learning, specifically utilizing the ConvnetJS library within Javascript.
 
 This project can be found [here](https://www.projects.ryleygg.com/tetris/).
