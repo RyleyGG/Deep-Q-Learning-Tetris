@@ -854,7 +854,7 @@ function playerAction(decision, event) //Combines both the player inputs and the
 
 document.addEventListener('keydown', event =>
 {
-    playerAction('',event.key);
+    if (curGamemode === 'player') playerAction('',event.key);
 });
 
 canvasUpdate();

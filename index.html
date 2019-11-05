@@ -54,6 +54,19 @@
             border-radius: 5px;
         }
 
+        .buttonBorder
+        {
+            position: absolute;
+            width: 20vw;
+            height: 15vh;
+            bottom: 2vh;
+            right: 0.2vw;
+            background-color: #000;
+            z-index: -1;
+            border: 2px solid #4e03fc;
+            border-radius: 5px;
+        }
+
         .nextShapeBorder
         {
             position: absolute;
@@ -219,8 +232,8 @@
         {
             font-family: 'Tetris Regular';
             position: absolute;
-            bottom: 10vh;
-            right: 0.9vw;
+            bottom: 3vh;
+            right: 15vw;
             font-size: 1.5vw;
             text-justify: center;
             color: black;
@@ -236,6 +249,18 @@
             text-justify: center;
             color: black;
         }
+
+        #gameplayMode
+        {
+            font-family: 'Tetris Regular';
+            position: absolute;
+            bottom: 10vh;
+            right: 1.1vw;
+            font-size: 1.5vw;
+            text-justify: center;
+            color: black;
+        }
+
         
         .canvas-container
         {
@@ -272,14 +297,16 @@
     <p id = 'totalScoreText'> Total Score: 0</p>
     <p id = 'shapeGameText'> Average Shapes Per Game: 0 (0 last 15 min.)</p>
     <p id = 'goodShapeText'> Average "Good Shapes" Per Game: 0 (0 last 15 min.)</p>
-    <button id = 'saveProgress' onclick = "progressUpdate('save')">Save Progress</button>
-    <button id = 'reloadProgress' onclick = "progressUpdate('reload')">Reload Progress</button>
+    <button id = 'saveProgress' onclick = "progressUpdate('save')">Save</button>
+    <button id = 'reloadProgress' onclick = "progressUpdate('reload')">Reload</button>
+    <button id = 'gameplayMode' onclick = 'changeGameplayMode()'>Current gamemode: AI</button>
 
     <img src = '' alt = 'next shape' id = 'nextShapeImage'>
 
     <div class="textBorder"></div>
-    <div class="botInfoBorder"></div>
+    <div class="botInfoBorder" id = 'botInfoBorder'></div>
     <div class="nextShapeBorder"></div>
+    <div class="buttonBorder" id = 'buttonBorder'></div>
 
     <div class = 'canvas-container' id="gameover" style="display: none">
         <canvas width="600" height="1200" style="border: 5px solid #4e03fc"></canvas>

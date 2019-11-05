@@ -16,6 +16,7 @@ let finalShapeName;
 let playerScoreOld = 0; //Keeping a record of the total player score before the next action
 let totalLinesClearedOld = 0; //Keeping a record of the total lines cleared before the next action
 
+
 // VARIABLES USED FOR DISPLAYING DATA TO USER //
 let actionCount = 0;
 
@@ -65,20 +66,19 @@ function initNet()
     //Array of the various options
     let opt = {};
     opt.temporal_window = temporal_window; //The amount of "temporal memory" the AI has, in terms of "time steps"
-    opt.experience_size = 2500000; //size of experience replay memory
-    opt.start_learn_threshold = 30000; //number of examples in experience replay memory before AI begins learning
+    opt.experience_size = 500000; //size of experience replay memory
+    opt.start_learn_threshold = 50000; //number of examples in experience replay memory before AI begins learning
     opt.gamma = 0.9; //Determines how much the AI plans ahead, on a scale of 0 to 1.
-    opt.learning_steps_total = 35000000; //Number of total steps to learn for
-    opt.learning_steps_burnin = 25000; //For the above number of steps, how many should be completely random at the beginning of the learning process?
+    opt.learning_steps_total = 500000; //Number of total steps to learn for
+    opt.learning_steps_burnin  = 25000; //For the above number of steps, how many should be completely random at the beginning of the learning process?
     opt.epsilon_min = 0.01; //Epsilon determines the amount of randomness the AI will implement over time. Set to 0 for AI to only use learned experiences deep into the learning process
     opt.epsilon_test_time = 0.01; //what epsilon to use at test time? (i.e. when learning is disabled)
     opt.layer_defs = layer_defs; //For some reason, this is causing NaN values, so don't include for now.
     opt.tdtrainer_options = tdtrainer_options;
     brain = new deepqlearn.Brain(inputNum, actionNum, opt);
     botReady = 1;
-
-    //if (gatherTime() - startTime > 3600000) setInterval(progressUpdate('save'), 900000);
 }
+
 
 
 function progressUpdate(action) //This function will allow the user to manually save or reload progress of the bot, including all its experiences and statistics
@@ -210,6 +210,23 @@ function refreshBot() //Refreshes the AI with no information regarding the games
 {
     botReady = 0;
     actionCount++;
+
+    if (brain.experience_size === 500000 && actionCount >= 450000 && actionCount <= 450005) brain.experience_size = 1000000;
+    else if (brain.experience_size === 1000000 && actionCount >= 950000 && actionCount <= 950005) brain.experience_size = 1500000;
+    else if (brain.experience_size === 1500000 && actionCount >= 1450000 && actionCount <= 1450005) brain.experience_size = 2000000;
+    else if (brain.experience_size === 2000000 && actionCount >= 1950000 && actionCount <= 1950005) brain.experience_size = 2500000;
+    else if (brain.experience_size === 2500000 && actionCount >= 2450000 && actionCount <= 2450005) brain.experience_size = 3000000;
+    else if (brain.experience_size === 3000000 && actionCount >= 2950000 && actionCount <= 2950005) brain.experience_size = 3500000;
+
+    if (brain.learning_steps_total === 500000 && actionCount >= 450000 && actionCount <= 450005) brain.learning_steps_total = 1000000;
+    else if (brain.learning_steps_total === 1000000 && actionCount >= 950000 && actionCount <= 950005) brain.learning_steps_total = 2000000;
+    else if (brain.learning_steps_total === 2000000 && actionCount >= 1450000 && actionCount <= 1450005) brain.learning_steps_total = 2500000;
+    else if (brain.learning_steps_total === 2500000 && actionCount >= 1950000 && actionCount <= 1950005) brain.learning_steps_total = 3000000;
+    else if (brain.learning_steps_total === 3000000 && actionCount >= 3000000 && actionCount <= 3000005) brain.learning_steps_total = 5000000;
+    else if (brain.learning_steps_total === 5000000 && actionCount >= 7490000 && actionCount <= 7490005) brain.learning_steps_total = 10000000;
+    else if (brain.learning_steps_total === 7500000 && actionCount >= 12500000 && actionCount <= 12500005) brain.learning_steps_total = 15000000;
+    
+
     document.getElementById('actionText').innerHTML = 'Total Actions: '+ actionCount;
 
     if (document.querySelector('#gameover').style.display != 'block')
@@ -393,7 +410,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -406,7 +423,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -424,7 +441,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -437,7 +454,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
             }
@@ -453,7 +470,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -466,7 +483,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
             }
@@ -482,7 +499,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -495,7 +512,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
             }
@@ -511,7 +528,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -524,7 +541,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -543,7 +560,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -562,7 +579,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
             }
@@ -578,7 +595,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -597,7 +614,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -616,7 +633,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
 
@@ -629,7 +646,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                     }
                     else
                     {
-                        reward -= 25;
+                        reward -= 15;
                     }
                 }
             }
@@ -652,7 +669,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                 }
                 else
                 {
-                    reward -= 25;
+                    reward -= 15;
                 }
             }
 
@@ -667,7 +684,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                 }
                 else
                 {
-                    reward -= 25;
+                    reward -= 15;
                 }
             }
 
