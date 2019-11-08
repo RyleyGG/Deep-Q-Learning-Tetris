@@ -58,6 +58,7 @@ function changeGameplayMode()
         document.getElementById('buttonBorder').style.width = '20vw';
         document.getElementById('saveProgress').style.right = '15vw';
         document.getElementById('gameplayMode').innerHTML = 'Current Gamemode: AI';
+        shapeCounter = 0;
         newGame();
         botReady = 1;
     }
