@@ -217,14 +217,16 @@ function refreshBot() //Refreshes the AI with no information regarding the games
     else if (brain.experience_size === 2000000 && actionCount >= 1950000 && actionCount <= 1950005) brain.experience_size = 2500000;
     else if (brain.experience_size === 2500000 && actionCount >= 2450000 && actionCount <= 2450005) brain.experience_size = 3000000;
     else if (brain.experience_size === 3000000 && actionCount >= 2950000 && actionCount <= 2950005) brain.experience_size = 3500000;
+    else if (brain.experience_size === 3000000 && actionCount >= 3499990 && actionCount <= 3499995) brain.experience_size = 5000000;
 
     if (brain.learning_steps_total === 500000 && actionCount >= 450000 && actionCount <= 450005) brain.learning_steps_total = 1000000;
     else if (brain.learning_steps_total === 1000000 && actionCount >= 950000 && actionCount <= 950005) brain.learning_steps_total = 2000000;
     else if (brain.learning_steps_total === 2000000 && actionCount >= 1450000 && actionCount <= 1450005) brain.learning_steps_total = 2500000;
     else if (brain.learning_steps_total === 2500000 && actionCount >= 1950000 && actionCount <= 1950005) brain.learning_steps_total = 3000000;
     else if (brain.learning_steps_total === 3000000 && actionCount >= 3000000 && actionCount <= 3000005) brain.learning_steps_total = 5000000;
-    else if (brain.learning_steps_total === 5000000 && actionCount >= 7490000 && actionCount <= 7490005) brain.learning_steps_total = 10000000;
+    else if (brain.learning_steps_total === 5000000 && actionCount >= 7490000 && actionCount <= 7490005) brain.learning_steps_total = 12500000;
     else if (brain.learning_steps_total === 7500000 && actionCount >= 12500000 && actionCount <= 12500005) brain.learning_steps_total = 15000000;
+    else if (brain.learning_steps_total === 15000000 && actionCount >= 15000000 && actionCount <= 15000005) brain.learning_steps_total = 25000000;
     
 
     document.getElementById('actionText').innerHTML = 'Total Actions: '+ actionCount;
@@ -375,6 +377,14 @@ function refreshBot() //Refreshes the AI with no information regarding the games
                 }
             }
             
+        }
+
+        for (i = 0; x < gameInfo.length; i++)
+        {
+            if (typeof gameInfo[i] != 'number')
+            {
+                gameInfo[i] = 0;
+            }
         }
 
         decision = brain.forward(gameInfo); //Based on the information above, the bot makes a decision
