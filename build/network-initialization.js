@@ -379,7 +379,7 @@ function refreshBot() //Refreshes the AI with no information regarding the games
             
         }
 
-        for (i = 0; x < gameInfo.length; i++)
+        for (i = 0; i < gameInfo.length; i++)
         {
             if (typeof gameInfo[i] != 'number')
             {
