@@ -28,8 +28,29 @@ function changeGameplayMode()
         clearInterval(botReadyFuncInterval);
         clearInterval(botAgeInterval);
         clearInterval(valueAverageOverTimeInterval);
-        document.getElementById('buttonBorder').style.width = '24vw';
-        document.getElementById('saveProgress').style.right = '19vw';
+        
+        if (mobileCheckVal)
+        {
+            document.getElementById('buttonBorder').style.width = '65vw'; 
+            document.getElementById('mobile-aistats').style.display = 'none';            
+            document.getElementById('mobile-maindisplay').style.display = 'none';
+            document.getElementById('scoreText').style.display = 'block';
+            document.getElementById('levelText').style.display = 'block';   
+            document.getElementById('textBorder').style.display = 'block';    
+            document.getElementById('left-arrow-image').style.display = 'block'; 
+            document.getElementById('right-arrow-image').style.display = 'block'; 
+            document.getElementById('up-arrow-image').style.display = 'block'; 
+            document.getElementById('down-arrow-image').style.display = 'block'; 
+        }
+        else
+        {
+
+            document.getElementById('buttonBorder').style.width = '24vw';
+            document.getElementById('saveProgress').style.right = '19vw';
+        }
+
+        document.getElementById('saveProgress').style.display = 'none';
+        document.getElementById('reloadProgress').style.display = 'none';  
         document.getElementById('botInfoBorder').style.display = 'none';
         document.getElementById('ageText').style.display = 'none';
         document.getElementById('totalScoreText').style.display = 'none';
@@ -55,8 +76,27 @@ function changeGameplayMode()
         document.getElementById('rewardText').style.display = 'block';
         document.getElementById('shapeGameText').style.display = 'block';
         document.getElementById('goodShapeText').style.display = 'block';
-        document.getElementById('buttonBorder').style.width = '20vw';
-        document.getElementById('saveProgress').style.right = '15vw';
+        document.getElementById('saveProgress').style.display = 'block';
+        document.getElementById('reloadProgress').style.display = 'block'; 
+        if (mobileCheckVal)
+        {
+            document.getElementById('buttonBorder').style.width = '66vw';
+            document.getElementById('saveProgress').style.right = '20vw';
+            document.getElementById('mobile-maindisplay').style.display = 'block';       
+            document.getElementById('scoreText').style.display = 'none';
+            document.getElementById('levelText').style.display = 'none';    
+            document.getElementById('textBorder').style.display = 'none';    
+            document.getElementById('left-arrow-image').style.display = 'none'; 
+            document.getElementById('right-arrow-image').style.display = 'none'; 
+            document.getElementById('up-arrow-image').style.display = 'none'; 
+            document.getElementById('down-arrow-image').style.display = 'none'; 
+        }
+        else
+        {
+            document.getElementById('buttonBorder').style.width = '20vw';
+            document.getElementById('saveProgress').style.right = '15vw';
+        }
+
         document.getElementById('gameplayMode').innerHTML = 'Current Gamemode: AI';
         shapeCounter = 0;
         newGame();

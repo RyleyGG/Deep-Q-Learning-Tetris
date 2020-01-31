@@ -225,8 +225,7 @@ function drawOutline(playArea,offset) //Drawing the outline for the currently ac
 
 function newShape(playerInitial) //Handles choosing a new shape, and updates the associated color and name
 {
-    
-    for (i = 0; i < 50000; i++)
+    for (i = 0; i < 50; i++)
     {
         randShapeList.push(Math.floor(Math.random()*shapeList.length));
 
@@ -236,56 +235,91 @@ function newShape(playerInitial) //Handles choosing a new shape, and updates the
         }
     }
 
-    if (randShapeIndex > 50000)
+    if (randShapeIndex > 50) 
     {
         randShapeIndex = 0;
     }
-    
     
     randShape = shapeList[randShapeList[randShapeIndex]];
     randShapeIndex++;
     shapeColor = colorList[shapeList.indexOf(randShape)];
     shapeName = shapeNameList[shapeList.indexOf(randShape)];
     nextShapeName = shapeNameList[shapeList.indexOf(shapeList[randShapeList[randShapeIndex]])];
-    document.getElementById('nextShapeImage').src = `shapepictures/${nextShapeName}.png`;
 
     //Different configurations for the shape placement, size, etc
-    if (nextShapeName === 'iShape')
+    document.getElementById('nextShapeImage').src = `shapepictures/${nextShapeName}.png`;
+    if (mobileCheckVal === false)
     {
-        document.getElementById('nextShapeImage').style.width = '4vw';
-        document.getElementById('nextShapeImage').style.top = '7vh';
+        if (nextShapeName === 'iShape')
+        {
+            document.getElementById('nextShapeImage').style.width = '4vw';
+            document.getElementById('nextShapeImage').style.top = '7vh';
+        }
+        else if (nextShapeName === 'tShape')
+        {
+            document.getElementById('nextShapeImage').style.width = '7vw';
+            document.getElementById('nextShapeImage').style.top = '12vh';
+            document.getElementById('nextShapeImage').style.right = '2vw';
+        }
+        else if (nextShapeName === 'cubeShape')
+        {
+            document.getElementById('nextShapeImage').style.width = '7vw';
+            document.getElementById('nextShapeImage').style.top = '11vh';
+            document.getElementById('nextShapeImage').style.right = '2vw';
+        }
+        else if (nextShapeName === 'zShape' || nextShapeName === 'sShape')
+        {
+            document.getElementById('nextShapeImage').style.width = '7vw';
+            document.getElementById('nextShapeImage').style.top = '13vh';
+            document.getElementById('nextShapeImage').style.right = '2vw';
+        }
+        else if (nextShapeName === 'lShape' || nextShapeName === 'jShape')
+        {
+            document.getElementById('nextShapeImage').style.width = '5vw';
+            document.getElementById('nextShapeImage').style.top = '10vh';
+            document.getElementById('nextShapeImage').style.right = '3vw';
+        }
     }
-    else if (nextShapeName === 'tShape')
+    else
     {
-        document.getElementById('nextShapeImage').style.width = '7vw';
-        document.getElementById('nextShapeImage').style.top = '12vh';
-        document.getElementById('nextShapeImage').style.right = '2vw';
+        if (nextShapeName === 'iShape')
+        {
+            document.getElementById('nextShapeImage').style.width = '8vw';
+            document.getElementById('nextShapeImage').style.bottom = '21vh';
+            document.getElementById('nextShapeImage').style.right = '8vw';
+        }
+        else if (nextShapeName === 'tShape')
+        {
+            document.getElementById('nextShapeImage').style.width = '12vw';
+            document.getElementById('nextShapeImage').style.bottom = '21vh';
+            document.getElementById('nextShapeImage').style.right = '8vw';
+        }
+        else if (nextShapeName === 'cubeShape')
+        {
+            document.getElementById('nextShapeImage').style.width = '10vw';
+            document.getElementById('nextShapeImage').style.bottom = '21vh';
+            document.getElementById('nextShapeImage').style.right = '8vw';
+        }
+        else if (nextShapeName === 'zShape' || nextShapeName === 'sShape')
+        {
+            document.getElementById('nextShapeImage').style.width = '13vw';
+            document.getElementById('nextShapeImage').style.bottom = '21vh';
+            document.getElementById('nextShapeImage').style.right = '8vw';
+        }
+        else if (nextShapeName === 'lShape' || nextShapeName === 'jShape')
+        {
+            document.getElementById('nextShapeImage').style.width = '10vw';
+            document.getElementById('nextShapeImage').style.bottom = '21vh';
+            document.getElementById('nextShapeImage').style.right = '9vw';
+        } 
+        
     }
-    else if (nextShapeName === 'cubeShape')
-    {
-        document.getElementById('nextShapeImage').style.width = '7vw';
-        document.getElementById('nextShapeImage').style.top = '11vh';
-        document.getElementById('nextShapeImage').style.right = '2vw';
-    }
-    else if (nextShapeName === 'zShape' || nextShapeName === 'sShape')
-    {
-        document.getElementById('nextShapeImage').style.width = '7vw';
-        document.getElementById('nextShapeImage').style.top = '13vh';
-        document.getElementById('nextShapeImage').style.right = '2vw';
-    }
-    else if (nextShapeName === 'lShape' || nextShapeName === 'jShape')
-    {
-        document.getElementById('nextShapeImage').style.width = '5vw';
-        document.getElementById('nextShapeImage').style.top = '10vh';
-        document.getElementById('nextShapeImage').style.right = '3vw';
-    }
-
 
     if (playerInitial === 0)
     {
         if (player.shapeName === shapeName) // If the same shape was generated by the function twice in a row, run it again
         {
-            newShape(playerInitial);
+            newShape(0);
         }
         else
         {
@@ -305,7 +339,7 @@ function newShape(playerInitial) //Handles choosing a new shape, and updates the
             player.shapeName = shapeName;
             player.pos.x = 3;
             player.pos.y = 0;
-            
+
             if ((collisionCheck(playArea,player.matrix,0,player) === true) || (playArea[0][2] != 0 || playArea[0][3] != 0 || playArea[0][4] != 0))
             {
                 gameOver();
@@ -313,6 +347,7 @@ function newShape(playerInitial) //Handles choosing a new shape, and updates the
         }
     }
     return [randShape,shapeColor,shapeName]
+    
 }
 const shapeAttrib = newShape(1); //Running the newShape function and saving the results
 
