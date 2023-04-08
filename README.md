@@ -1,8 +1,6 @@
 # Deep Q-Learning Tetris
 A ground-up recreation of the classic game of 'Tetris', with the added layer of an AI learning the game via Deep Q-Learning, specifically utilizing the ConvnetJS library within Javascript.
 
-This project can be found [here](https://www.projects.ryleygg.com/tetris/).
-
 The project is written completely in Javascript, save for the baseline needed HTML and CSS to create and structure the different elements; all animations are handled within the Javascript.
 
 
@@ -14,7 +12,7 @@ In order to create an AI that could manipulate the game of Tetris and learn from
 
 * Drawing the shape - this includes both drawing the shape and any properties associated with it, primarily the outline. As stated above, this is predicated among the assumption that a shape can be represented as a matrix. Take, for example, the T-Shape: 
 
-<img src="https://vice-images.vice.com/images/content-images/2016/05/18/tetris-the-movie-vgtrn-body-image-1463571891.png" width="175" alt='T-Shape'>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Tetris_T.svg/1200px-Tetris_T.svg.png" width="175" alt='T-Shape'>
 
 This shape can be represented in a 3x3 matrix in the following configuration:
 [
